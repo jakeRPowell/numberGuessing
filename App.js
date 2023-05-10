@@ -1,22 +1,54 @@
+import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import PrimaryButton from './components/PrimaryButton';
+import { ImageBackground, StyleSheet, Text, View } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import StartGameScreen from './screens/StartGameScreen';
+import GameScreen from './screens/GameScreen';
 
 export default function App() {
+  const [userNumber, setUserNumber] = useState(null);
+
+  const pickedNumberHandler = (number) => {
+    setUserNumber(number);
+  };
+
   return (
-    <View style={styles.container}>
-      <Text>Hello World!!!!</Text>
-      <PrimaryButton>Hello</PrimaryButton>
-      <StatusBar style="auto" />
-    </View>
+    <LinearGradient colors={['#f7ae2f', '#f5e6cc']} style={styles.root}>
+      <ImageBackground
+        source={require('./assets/images/background.jpg')}
+        resizeMode="cover"
+        style={styles.root}
+        imageStyle={styles.backgroundImage}
+      >
+        <StatusBar style="light" />
+        <View style={styles.rootInner}>
+          {userNumber ? (
+            <GameScreen />
+          ) : (
+            <StartGameScreen onPickNumber={pickedNumberHandler} />
+          )}
+        </View>
+      </ImageBackground>
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  root: {
     flex: 1,
-    backgroundColor: '#fff',
+  },
+  rootInner: {
+    flex: 1,
+    padding: 20,
+    width: '100%',
+    height: '100%',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  backgroundImage: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+    opacity: 0.5,
   },
 });
