@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { ImageBackground, StyleSheet, Text, View } from 'react-native';
+import {
+  ImageBackground,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import StartGameScreen from './screens/StartGameScreen';
 import GameScreen from './screens/GameScreen';
@@ -20,14 +26,16 @@ export default function App() {
         style={styles.root}
         imageStyle={styles.backgroundImage}
       >
-        <StatusBar style="light" />
-        <View style={styles.rootInner}>
-          {userNumber ? (
-            <GameScreen />
-          ) : (
-            <StartGameScreen onPickNumber={pickedNumberHandler} />
-          )}
-        </View>
+        <SafeAreaView style={styles.root}>
+          <StatusBar style="light" />
+          <View style={styles.rootInner}>
+            {userNumber ? (
+              <GameScreen />
+            ) : (
+              <StartGameScreen onPickNumber={pickedNumberHandler} />
+            )}
+          </View>
+        </SafeAreaView>
       </ImageBackground>
     </LinearGradient>
   );

@@ -44,7 +44,9 @@ export default function StartGameScreen({ onPickNumber }: Props) {
       />
 
       <View style={styles.buttonContainer}>
-        <PrimaryButton onPress={reset}>Reset</PrimaryButton>
+        <PrimaryButton backgroundColor="#e27d60" onPress={reset}>
+          Reset
+        </PrimaryButton>
         <PrimaryButton onPress={confirmInputHandler}>Confirm</PrimaryButton>
       </View>
     </View>
