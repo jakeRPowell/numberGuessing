@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Alert, StyleSheet, TextInput, View } from 'react-native';
 import PrimaryButton from '../components/PrimaryButton';
-
+import Colors from '../constants/colors';
 type Props = {
   onPickNumber: (chosenNumber: number) => void;
 };
@@ -44,7 +44,7 @@ export default function StartGameScreen({ onPickNumber }: Props) {
       />
 
       <View style={styles.buttonContainer}>
-        <PrimaryButton backgroundColor="#e27d60" onPress={reset}>
+        <PrimaryButton backgroundColor={Colors.danger} onPress={reset}>
           Reset
         </PrimaryButton>
         <PrimaryButton onPress={confirmInputHandler}>Confirm</PrimaryButton>

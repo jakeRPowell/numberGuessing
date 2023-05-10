@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import { Platform, Pressable, StyleSheet, Text, View } from 'react-native';
+import Colors from '../constants/colors';
 
 type PrimaryButtonProps = {
   children: ReactNode;
@@ -9,7 +10,7 @@ type PrimaryButtonProps = {
 
 export default function PrimaryButton({
   onPress,
-  backgroundColor = '#41b3a3',
+  backgroundColor = Colors.primary,
   children,
 }: PrimaryButtonProps) {
   const isAndroid = Platform.OS === 'android';
