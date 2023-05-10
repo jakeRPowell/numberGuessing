@@ -30,7 +30,7 @@ export default function App() {
           <StatusBar style="light" />
           <View style={styles.rootInner}>
             {userNumber ? (
-              <GameScreen />
+              <GameScreen userChoice={userNumber} />
             ) : (
               <StartGameScreen onPickNumber={pickedNumberHandler} />
             )}

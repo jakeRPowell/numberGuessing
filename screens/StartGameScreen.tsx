@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Alert, StyleSheet, TextInput, View } from 'react-native';
-import PrimaryButton from '../components/PrimaryButton';
+import PrimaryButton from '../components/ui/PrimaryButton';
 import Colors from '../constants/colors';
 type Props = {
   onPickNumber: (chosenNumber: number) => void;
@@ -67,10 +67,10 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     fontSize: 30,
-    borderBottomColor: '#85dcbe',
+    borderBottomColor: Colors.border,
     borderBottomWidth: 2,
     fontWeight: 'bold',
-    color: '#85dcbe',
+    color: Colors.border,
   },
   buttonContainer: {
     flexDirection: 'row',
