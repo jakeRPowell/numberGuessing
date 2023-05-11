@@ -11,7 +11,7 @@ type Props = {
   userChoice: number;
   resetGameHandler: () => void;
   setGameIsOver: React.Dispatch<SetStateAction<boolean>>;
-  incrementGuesses: () => void;
+  updateGuesses: (arg: number) => void;
 };
 
 function generateRandomBetween(min: any, max: any, exclude?: any): any {
@@ -26,7 +26,7 @@ function generateRandomBetween(min: any, max: any, exclude?: any): any {
 
 function GameScreen(
   this: any,
-  { userChoice, resetGameHandler, setGameIsOver, incrementGuesses }: Props
+  { userChoice, resetGameHandler, setGameIsOver, updateGuesses }: Props
 ) {
   const [currentGuess, setCurrentGuess] = useState<number | undefined>(
     generateRandomBetween(1, 100, userChoice)
@@ -38,10 +38,14 @@ function GameScreen(
   const gameIsOver = () => {};
 
   useEffect(() => {
+    if (currentGuess) {
+      updateGuesses(currentGuess);
+    } else {
+      updateGuesses(initialGuess);
+    }
+
     if (currentGuess === userChoice) {
       setGameIsOver(true);
-    } else {
-      incrementGuesses();
     }
   }, [currentGuess]);
 

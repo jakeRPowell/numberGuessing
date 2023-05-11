@@ -19,7 +19,7 @@ SplashScreen.preventAutoHideAsync();
 export default function App() {
   const [userNumber, setUserNumber] = useState(null);
   const [gameIsOver, setGameIsOver] = useState(false);
-  const [guesses, setGuesses] = useState(1);
+  const [guesses, setGuesses] = useState([]);
 
   const [fontsLoaded] = useFonts({
     'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
@@ -33,12 +33,12 @@ export default function App() {
   const resetGameHandler = () => {
     setUserNumber(null);
     setGameIsOver(false);
-    setGuesses(1);
+    setGuesses([]);
   };
 
-  const incrementGuesses = () => {
+  const updateGuesses = (guess) => {
+    setGuesses((currentGuesses) => [guess, ...currentGuesses]);
     console.log(guesses);
-    setGuesses((prevGuesses) => prevGuesses + 1);
   };
 
   const onLayoutRootView = useCallback(async () => {
@@ -73,7 +73,7 @@ export default function App() {
           <View style={styles.rootInner}>
             {gameIsOver ? (
               <GameOverScreen
-                guesses={guesses}
+                guessesData={guesses}
                 userNumber={userNumber}
                 resetGameHandler={resetGameHandler}
               />
@@ -81,7 +81,7 @@ export default function App() {
               <GameScreen
                 setGameIsOver={setGameIsOver}
                 userChoice={userNumber}
-                incrementGuesses={incrementGuesses}
+                updateGuesses={updateGuesses}
               />
             ) : (
               <StartGameScreen
