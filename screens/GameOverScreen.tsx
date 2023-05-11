@@ -2,6 +2,7 @@ import React from 'react';
 import PrimaryButton from '../components/ui/PrimaryButton';
 import Screen from '../components/ui/Screen';
 import { Image, StyleSheet, Text, View } from 'react-native';
+import Bold from '../components/ui/Bold';
 
 type Props = {
   resetGameHandler: () => void;
@@ -17,7 +18,9 @@ export default function GameOverScreen({ resetGameHandler }: Props) {
         />
       </View>
       <PrimaryButton onPress={resetGameHandler}>Reset</PrimaryButton>
-      <Text>Your phone took X guesses to get Y</Text>
+      <Text>
+        Your phone took <Bold>X</Bold> guesses to get <Bold>Y</Bold>
+      </Text>
     </Screen>
   );
 }
