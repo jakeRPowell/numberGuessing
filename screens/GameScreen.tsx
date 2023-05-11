@@ -11,6 +11,7 @@ type Props = {
   userChoice: number;
   resetGameHandler: () => void;
   setGameIsOver: React.Dispatch<SetStateAction<boolean>>;
+  incrementGuesses: () => void;
 };
 
 function generateRandomBetween(min: any, max: any, exclude?: any): any {
@@ -25,34 +26,26 @@ function generateRandomBetween(min: any, max: any, exclude?: any): any {
 
 function GameScreen(
   this: any,
-  { userChoice, resetGameHandler, setGameIsOver }: Props
+  { userChoice, resetGameHandler, setGameIsOver, incrementGuesses }: Props
 ) {
   const [currentGuess, setCurrentGuess] = useState<number | undefined>(
     generateRandomBetween(1, 100, userChoice)
   );
-  const [rounds, setRounds] = useState<number>(0);
   const [minBoundary, setMinBoundary] = useState<number>(1);
   const [maxBoundary, setMaxBoundary] = useState<number>(100);
   const initialGuess = generateRandomBetween(1, 100, userChoice);
 
-  const gameIsOver = () => {
-    setGameIsOver(true);
-  };
+  const gameIsOver = () => {};
 
   useEffect(() => {
     if (currentGuess === userChoice) {
-      Alert.alert('Game Over!', `It only took ${rounds} rounds`, [
-        { text: 'OK', style: 'cancel', onPress: gameIsOver },
-      ]);
+      setGameIsOver(true);
+    } else {
+      incrementGuesses();
     }
   }, [currentGuess]);
 
   const nextGuessHandler = (direction: 'lower' | 'higher') => {
-    setRounds((currentRounds) => currentRounds + 1);
-    console.log(
-      `direction: ${direction}, currentGuess: ${currentGuess}, userChoice: ${userChoice}, minBoundary: ${minBoundary}, maxBoundary: ${maxBoundary}`
-    );
-
     if (
       (direction === 'lower' && currentGuess && currentGuess < userChoice) ||
       (direction === 'higher' && currentGuess && currentGuess > userChoice)
@@ -74,7 +67,6 @@ function GameScreen(
       maxBoundary,
       currentGuess
     );
-    console.log(newRndNumber);
     setCurrentGuess(newRndNumber);
   };
 

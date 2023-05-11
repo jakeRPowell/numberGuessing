@@ -6,9 +6,15 @@ import Bold from '../components/ui/Bold';
 
 type Props = {
   resetGameHandler: () => void;
+  guesses: number;
+  userNumber: number;
 };
 
-export default function GameOverScreen({ resetGameHandler }: Props) {
+export default function GameOverScreen({
+  resetGameHandler,
+  guesses,
+  userNumber,
+}: Props) {
   return (
     <Screen>
       <View style={styles.imageContainer}>
@@ -17,10 +23,11 @@ export default function GameOverScreen({ resetGameHandler }: Props) {
           style={styles.image}
         />
       </View>
-      <PrimaryButton onPress={resetGameHandler}>Reset</PrimaryButton>
       <Text>
-        Your phone took <Bold>X</Bold> guesses to get <Bold>Y</Bold>
+        Your phone took <Bold>{guesses}</Bold> guesses to get{' '}
+        <Bold>{userNumber}</Bold>
       </Text>
+      <PrimaryButton onPress={resetGameHandler}>Reset</PrimaryButton>
     </Screen>
   );
 }

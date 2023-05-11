@@ -19,6 +19,7 @@ SplashScreen.preventAutoHideAsync();
 export default function App() {
   const [userNumber, setUserNumber] = useState(null);
   const [gameIsOver, setGameIsOver] = useState(false);
+  const [guesses, setGuesses] = useState(1);
 
   const [fontsLoaded] = useFonts({
     'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
@@ -32,7 +33,14 @@ export default function App() {
   const resetGameHandler = () => {
     setUserNumber(null);
     setGameIsOver(false);
+    setGuesses(1);
   };
+
+  const incrementGuesses = () => {
+    console.log(guesses);
+    setGuesses((prevGuesses) => prevGuesses + 1);
+  };
+
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded) {
       // This tells the splash screen to hide immediately! If we call this after
@@ -64,11 +72,16 @@ export default function App() {
           <StatusBar style="light" />
           <View style={styles.rootInner}>
             {gameIsOver ? (
-              <GameOverScreen resetGameHandler={resetGameHandler} />
+              <GameOverScreen
+                guesses={guesses}
+                userNumber={userNumber}
+                resetGameHandler={resetGameHandler}
+              />
             ) : userNumber ? (
               <GameScreen
                 setGameIsOver={setGameIsOver}
                 userChoice={userNumber}
+                incrementGuesses={incrementGuesses}
               />
             ) : (
               <StartGameScreen
