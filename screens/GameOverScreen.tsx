@@ -30,7 +30,7 @@ export default function GameOverScreen({
         Your phone took <Bold>{guesses.length}</Bold> guesses to get{' '}
         <Bold>{userNumber}</Bold>
       </Text>
-      <View style={{ height: 100 }}>
+      <View style={{ height: 150 }}>
         <FlatList
           numColumns={5}
           data={guesses}
