@@ -5,6 +5,7 @@ import NumberContainer from '../components/game/NumberContainer';
 import PrimaryButton from '../components/ui/PrimaryButton';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import Screen from '../components/ui/Screen';
+import { FontAwesome } from '@expo/vector-icons';
 
 type Props = {
   userChoice: number;
@@ -87,10 +88,10 @@ function GameScreen(
           onPress={nextGuessHandler.bind(this, 'lower')}
           backgroundColor={Colors.danger}
         >
-          Lower
+          <FontAwesome name="minus" size={24} color="#fff" />
         </PrimaryButton>
         <PrimaryButton onPress={nextGuessHandler.bind(this, 'higher')}>
-          Higher
+          <FontAwesome name="plus" size={24} color="#fff" />
         </PrimaryButton>
       </View>
     </Screen>
