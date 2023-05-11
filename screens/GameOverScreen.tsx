@@ -1,6 +1,15 @@
 import React from 'react';
-import { View } from 'react-native';
+import PrimaryButton from '../components/ui/PrimaryButton';
+import Screen from '../components/ui/Screen';
 
-export default function GameOverScreen() {
-  return <View>GameOverScreen</View>;
+type Props = {
+  resetGameHandler: () => void;
+};
+
+export default function GameOverScreen({ resetGameHandler }: Props) {
+  return (
+    <Screen>
+      <PrimaryButton onPress={resetGameHandler}>Reset</PrimaryButton>
+    </Screen>
+  );
 }

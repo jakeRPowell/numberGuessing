@@ -41,7 +41,6 @@ export default function PrimaryButton({
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    flex: 1,
     borderRadius: 25,
     ...Platform.select({
       ios: {

@@ -9,13 +9,18 @@ type Props = {
 export default function NumberContainer({ children }: Props) {
   return (
     <View style={styles.container}>
-      <Title>Opponent's guess</Title>
+      <Title style={styles.customTitle}>Opponent's guess</Title>
       <Text style={styles.text}>{children}</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  customTitle: {
+    fontSize: 20,
+    marginVertical: 10,
+    fontWeight: 'bold',
+  },
   container: {
     alignItems: 'center',
     justifyContent: 'center',

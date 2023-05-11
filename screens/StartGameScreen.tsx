@@ -2,15 +2,25 @@ import React, { useState } from 'react';
 import { Alert, StyleSheet, TextInput, View } from 'react-native';
 import PrimaryButton from '../components/ui/PrimaryButton';
 import Colors from '../constants/colors';
+import Screen from '../components/ui/Screen';
 type Props = {
   onPickNumber: (chosenNumber: number) => void;
+  resetGameHandler: () => void;
 };
 
-export default function StartGameScreen({ onPickNumber }: Props) {
+export default function StartGameScreen({
+  onPickNumber,
+  resetGameHandler,
+}: Props) {
   const [enteredNumber, setEnteredNumber] = useState('');
 
   const numberInputHandler = (inputText: string) => {
     setEnteredNumber(inputText);
+  };
+
+  const resetHandler = () => {
+    resetGameHandler();
+    setEnteredNumber('');
   };
 
   const confirmInputHandler = () => {
@@ -20,7 +30,7 @@ export default function StartGameScreen({ onPickNumber }: Props) {
       Alert.alert(
         'Invalid number!',
         'Number has to be a number between 1 and 99.',
-        [{ text: 'Okay', style: 'destructive', onPress: reset }]
+        [{ text: 'Okay', style: 'destructive' }]
       );
       return;
     } else {
@@ -28,12 +38,8 @@ export default function StartGameScreen({ onPickNumber }: Props) {
     }
   };
 
-  const reset = () => {
-    console.log('reset');
-  };
-
   return (
-    <View style={styles.inputContainer}>
+    <Screen>
       <TextInput
         style={styles.numberInput}
         maxLength={2}
@@ -44,24 +50,16 @@ export default function StartGameScreen({ onPickNumber }: Props) {
       />
 
       <View style={styles.buttonContainer}>
-        <PrimaryButton backgroundColor={Colors.danger} onPress={reset}>
+        <PrimaryButton backgroundColor={Colors.danger} onPress={resetHandler}>
           Reset
         </PrimaryButton>
         <PrimaryButton onPress={confirmInputHandler}>Confirm</PrimaryButton>
       </View>
-    </View>
+    </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-  inputContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-    width: '100%',
-    gap: 20,
-  },
-
   numberInput: {
     textAlign: 'center',
     width: 50,

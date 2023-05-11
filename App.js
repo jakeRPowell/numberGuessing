@@ -10,12 +10,19 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import StartGameScreen from './screens/StartGameScreen';
 import GameScreen from './screens/GameScreen';
+import GameOverScreen from './screens/GameOverScreen';
 
 export default function App() {
   const [userNumber, setUserNumber] = useState(null);
+  const [gameIsOver, setGameIsOver] = useState(false);
 
   const pickedNumberHandler = (number) => {
     setUserNumber(number);
+  };
+
+  const resetGameHandler = () => {
+    setUserNumber(null);
+    setGameIsOver(false);
   };
 
   return (
@@ -29,10 +36,18 @@ export default function App() {
         <SafeAreaView style={styles.root}>
           <StatusBar style="light" />
           <View style={styles.rootInner}>
-            {userNumber ? (
-              <GameScreen userChoice={userNumber} />
+            {gameIsOver ? (
+              <GameOverScreen resetGameHandler={resetGameHandler} />
+            ) : userNumber ? (
+              <GameScreen
+                setGameIsOver={setGameIsOver}
+                userChoice={userNumber}
+              />
             ) : (
-              <StartGameScreen onPickNumber={pickedNumberHandler} />
+              <StartGameScreen
+                resetGameHandler={resetGameHandler}
+                onPickNumber={pickedNumberHandler}
+              />
             )}
           </View>
         </SafeAreaView>
